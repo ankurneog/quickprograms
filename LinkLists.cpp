@@ -3,26 +3,30 @@
 // Author      : Ankur
 // Version     :
 // Copyright   : Your copyright notice
-// Description : Hello World in C++, Ansi-style
+// Description : Templated Link List
 //============================================================================
 
 #include <iostream>
 using namespace std;
-struct Node {
-	int data;
-	struct Node *next;
-	Node(int d)
-	{
-		data=d;
-		next=NULL;
-	}
-};
-class LinkList {
-public :
 
-	void AddNode(int data);
-	void MakeList(int a[],int maxSize);
-	void DeleteNode(int data);
+
+
+template <typename T> class LinkList {
+public :
+	struct Node {
+		T data;
+		struct Node *next;
+		Node(int d)
+		{
+			data=d;
+			next=NULL;
+		}
+	};
+
+
+	void AddNode(T data);
+	void MakeList(T a[],int maxSize);
+	void DeleteNode(T data);
 	void ReverseList();
 	void PrintList();
 	void DeleteList();
@@ -47,14 +51,17 @@ private:
 	Node* tail;
 	int numNodes;
 };
-void LinkList::MakeList(int a[],int maxSize)
+
+template<typename T>
+void LinkList<T>::MakeList(T a[],int maxSize)
 {
 	for(int i=0;i<maxSize;++i)
 	{
 		AddNode(a[i]);
 	}
 }
-void LinkList::AddNode(int data)
+template<typename T>
+void LinkList<T>::AddNode(T data)
 
 {
 	Node *temp = new Node(data);
@@ -78,7 +85,8 @@ void LinkList::AddNode(int data)
 	tail=p;
 
 }
-void LinkList::DeleteNode(int info)
+template<typename T>
+void LinkList<T>::DeleteNode(T info)
 {
 	if(NULL==head)
 	{
@@ -112,7 +120,8 @@ void LinkList::DeleteNode(int info)
 	}
 }
 
-void LinkList::PrintList()
+template<typename T>
+void LinkList<T>::PrintList()
 {
 	if(NULL==head)
 	{
@@ -128,7 +137,9 @@ void LinkList::PrintList()
 		p=p->next;
 	}
 }
-void LinkList::DeleteList()
+
+template <typename T>
+void LinkList<T>::DeleteList()
 {
 
 	while(head!=NULL)
@@ -140,7 +151,9 @@ void LinkList::DeleteList()
 	}
 
 }
-void LinkList::ReverseList()
+
+template <typename T>
+void LinkList<T>::ReverseList()
 {
 	if(NULL==head)
 	{
@@ -162,7 +175,8 @@ void LinkList::ReverseList()
     head=p;
 }
 
-void MergeList(LinkList &ll1,LinkList &ll2, LinkList &mergedList)
+template <typename T>
+void MergeList(LinkList<T> &ll1,LinkList<T> &ll2, LinkList<T> &mergedList)
 {
 	if(ll1.IsEmpty()&&ll2.IsEmpty())
 	{
@@ -179,8 +193,9 @@ void MergeList(LinkList &ll1,LinkList &ll2, LinkList &mergedList)
 		mergedList=ll1;
 		return;
 	}
-	Node *pLL1=ll1.head;
-	Node *pLL2=ll2.head;
+
+    typename LinkList<T>::Node  *pLL1=ll1.head;
+	typename LinkList<T>::Node *pLL2=ll2.head;
 
 	if(pLL1->data<pLL2->data)
 	{
@@ -193,7 +208,7 @@ void MergeList(LinkList &ll1,LinkList &ll2, LinkList &mergedList)
 		pLL2=pLL2->next;
 
 	}
-	Node *pLLMerged = mergedList.head;
+	typename LinkList<T>::Node *pLLMerged = mergedList.head;
 
 
 	while(pLL1!=NULL&&pLL2!=NULL)
@@ -228,8 +243,9 @@ void MergeList(LinkList &ll1,LinkList &ll2, LinkList &mergedList)
 	ll2.head=NULL;
 
 }
-
-bool CompareNodes(Node *a,Node *b)
+/*
+template<typename T>
+bool CompareNodes(typename LinkList<T>::Node *a, typename LinkList<T>::Node *b)
 {
 	if(a==NULL&&b==NULL)
 	{
@@ -243,10 +259,11 @@ bool CompareNodes(Node *a,Node *b)
 	return false;
 }
 
-void CompareLinkLists(LinkList &ll1,LinkList &ll2)
+template <typename T>
+void CompareLinkLists(LinkList<T> &ll1,LinkList<T> &ll2)
 {
-	Node *a=ll1.head;
-	Node *b=ll2.head;
+	typename LinkList<T>::Node *a=ll1.head;
+	typename LinkList<T>::Node *b=ll2.head;
 
 	if(CompareNodes(a,b))
 	{
@@ -259,13 +276,13 @@ void CompareLinkLists(LinkList &ll1,LinkList &ll2)
 
 }
 
-
+*/
 
 int main() {
 
 	cout << "Link List Program" << endl; // prints Link List
 
-	LinkList ll1,ll2;
+	LinkList<int> ll1,ll2;
 
 	int a1[]={0,20,40,60,80};
 	int a2[]={0,20,40,60,80};
@@ -276,14 +293,14 @@ int main() {
 	ll1.PrintList();
 	ll2.PrintList();
 
-	LinkList mergedList;
+	LinkList<int> mergedList;
 
-	//MergeList(ll1,ll2,mergedList);
-	//mergedList.PrintList();
+	MergeList(ll1,ll2,mergedList);
+    mergedList.PrintList();
 	//ll1.PrintList();
 	//ll2.PrintList();
 
-	 CompareLinkLists(ll1,ll2);
+	// CompareLinkLists(ll1,ll2);
 
 
 
