@@ -1,5 +1,5 @@
 //============================================================================
-// Name        : TcpClienet.cpp
+// Name        : TcpClient.cpp
 // Author      : (c) Ankur Neog
 // Version     :
 // Copyright   : Your copyright notice
