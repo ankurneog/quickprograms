@@ -16,10 +16,10 @@ public :
 	struct Node {
 		T data;
 		struct Node *next;
-		Node(int d)
+		Node(T d)
 		{
 			data=d;
-			next=NULL;
+			next=nullptr;
 		}
 	};
 
@@ -32,13 +32,13 @@ public :
 	void DeleteList();
 	inline bool IsEmpty()
 	{
-		return head==NULL;
+		return head==nullptr;
 	}
 	Node *GetHead();
 	LinkList()
 	{
-		head=NULL;
-		tail=NULL;
+		head=nullptr;
+		tail=nullptr;
 		numNodes=0;
 	}
 	~LinkList()
@@ -67,7 +67,7 @@ void LinkList<T>::AddNode(T data)
 	Node *temp = new Node(data);
 	numNodes++;
 
-	if(NULL==head)
+	if(nullptr==head)
 	{
 		cout<<" Inserting First Element into the list "<<endl;
 		head=temp;
@@ -77,7 +77,7 @@ void LinkList<T>::AddNode(T data)
 	cout<<" Inserting Element : "<<numNodes<<endl;
 
 	Node *p =head;
-	while(p->next!=NULL)
+	while(p->next!=nullptr)
 	{
 		p=p->next;
 	}
@@ -88,14 +88,14 @@ void LinkList<T>::AddNode(T data)
 template<typename T>
 void LinkList<T>::DeleteNode(T info)
 {
-	if(NULL==head)
+	if(nullptr==head)
 	{
 		cout<<"Empty List, Nothing to Delete "<<endl;
 		return;
 	}
 	Node *p=head;
-	Node *q=NULL;
-	while(p->data!=info&&p!=NULL)
+	Node *q=nullptr;
+	while(p->data!=info&&p!=nullptr)
 	{
 		q=p;
 		p=p->next;
@@ -107,8 +107,8 @@ void LinkList<T>::DeleteNode(T info)
 			tail=q;
 		}
 		q->next=p->next;
-		p->next=NULL;
-		if(p!=NULL)
+		p->next=nullptr;
+		if(p!=nullptr)
 	        delete p;
 		numNodes--;
 
@@ -123,7 +123,7 @@ void LinkList<T>::DeleteNode(T info)
 template<typename T>
 void LinkList<T>::PrintList()
 {
-	if(NULL==head)
+	if(nullptr==head)
 	{
 		cout<<"List is Empty "<<endl;
 		return;
@@ -131,7 +131,7 @@ void LinkList<T>::PrintList()
 	cout<<"Printing Contents of Link List - Total Elements :  "<<numNodes<<endl;
 
 	Node *p=head;
-	while(p!=NULL)
+	while(p!=nullptr)
 	{
 		cout<<p->data<<endl;
 		p=p->next;
@@ -142,11 +142,11 @@ template <typename T>
 void LinkList<T>::DeleteList()
 {
 
-	while(head!=NULL)
+	while(head!=nullptr)
 	{
 		Node *p=head;
 		head=head->next;
-		if(p!=NULL)
+		if(p!=nullptr)
 		   delete p;
 	}
 
@@ -155,7 +155,7 @@ void LinkList<T>::DeleteList()
 template <typename T>
 void LinkList<T>::ReverseList()
 {
-	if(NULL==head)
+	if(nullptr==head)
 	{
 		cout<<"List is Empty..."<<endl;
 		return;
@@ -163,8 +163,8 @@ void LinkList<T>::ReverseList()
 	Node *p=head;
     Node *q=p->next;
     Node *r;
-    p->next=NULL;
-    while(q!=NULL)
+    p->next=nullptr;
+    while(q!=nullptr)
     {
     	    r=q->next;
     	    q->next =p;
@@ -211,7 +211,7 @@ void MergeList(LinkList<T> &ll1,LinkList<T> &ll2, LinkList<T> &mergedList)
 	typename LinkList<T>::Node *pLLMerged = mergedList.head;
 
 
-	while(pLL1!=NULL&&pLL2!=NULL)
+	while(pLL1!=nullptr&&pLL2!=nullptr)
 	{
 		if(pLL1->data<pLL2->data)
 		{
@@ -227,27 +227,27 @@ void MergeList(LinkList<T> &ll1,LinkList<T> &ll2, LinkList<T> &mergedList)
 			pLLMerged=pLLMerged->next;
 		}
 	}
-	while(pLL1!=NULL)
+	while(pLL1!=nullptr)
 	{
 		pLLMerged->next=pLL1;
 		pLL1=pLL1->next;
 		pLLMerged=pLLMerged->next;
 	}
-	while(pLL2!=NULL)
+	while(pLL2!=nullptr)
 	{
 		pLLMerged->next=pLL2;
 		pLL2=pLL2->next;
 		pLLMerged=pLLMerged->next;
 	}
-	ll1.head=NULL;
-	ll2.head=NULL;
+	ll1.head=nullptr;
+	ll2.head=nullptr;
 
 }
 /*
 template<typename T>
 bool CompareNodes(typename LinkList<T>::Node *a, typename LinkList<T>::Node *b)
 {
-	if(a==NULL&&b==NULL)
+	if(a==nullptr&&b==nullptr)
 	{
 		return true;
 	}
